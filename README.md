@@ -13,8 +13,8 @@ O sistema permitirá que a ONG otimize seus processos, melhore a eficiência na 
 
 * Melissa Duque Baía
 * Arthur Coelho de Souza
-* Felipe 
-* Jáderson
+* Felipe Augusto Lima Lopes
+* Jáderson Válner Ferreira de Lima
 
 ## Orientador
 
