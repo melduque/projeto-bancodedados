@@ -30,10 +30,10 @@ const ImovelModel = {
         })
     },
     Inserir: async (imovel) => {
-        const sql = "INSERT INTO IMOVEL (cep,endereco,complemento,num_residencia,nome_proprietario,telefone,status,descricao) VALUES (?,?,?,?,?,?,?,?)";
+        const sql = "INSERT INTO IMOVEL (cep,endereco,complemento,num_residencia,bairro,nome_proprietario,telefone,status,descricao) VALUES (?,?,?,?,?,?,?,?)";
 
         return new Promise((resolve, reject) => {
-            conexao.query(sql, [imovel.cep,imovel.endereco,imovel.complemento,imovel.num_residencia,imovel.nome_proprietario,imovel.telefone,imovel.status,imovel.descricao], (erro, resposta) => {
+            conexao.query(sql, [imovel.cep,imovel.endereco,imovel.complemento,imovel.num_residencia,imovel.bairro,imovel.nome_proprietario,imovel.telefone,imovel.status,imovel.descricao], (erro, resposta) => {
                 if (erro) {
                     console.log(`Erro ao Inserir Imovel Model: ${erro}`);
                     return reject(erro);
@@ -44,10 +44,10 @@ const ImovelModel = {
         })
     },
     Update: async (id, imovel) => {
-        const sql = "UPDATE IMOVEL SET cep=?, complemento=?, endereco=?,num_residencia=?,nome_proprietario=?,telefone=?, status=?, descricao=? WHERE id=?";
+        const sql = "UPDATE IMOVEL SET cep=?, complemento=?, endereco=?,num_residencia=?, bairro=?, nome_proprietario=?,telefone=?, status=?, descricao=? WHERE id=?";
 
         return new Promise((resolve, reject) => {
-            conexao.query(sql, [imovel.cep,imovel.complemento,imovel.endereco,imovel.num_residencia,imovel.nome_proprietario,imovel.telefone,imovel.status,imovel.descricao,id], (erro, resposta) => {
+            conexao.query(sql, [imovel.cep,imovel.complemento,imovel.endereco,imovel.num_residencia,imovel.bairro,imovel.nome_proprietario,imovel.telefone,imovel.status,imovel.descricao,id], (erro, resposta) => {
                 if (erro) {
                     console.log(`Erro ao Atualizar Imovel Model: ${erro}`);
                     return reject(erro);

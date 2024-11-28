@@ -5,8 +5,8 @@ imovelform.addEventListener('submit', async (event) => {
 
     const endereco = document.getElementById('imovelendereco').value;
     const cep = document.getElementById('imovelcep').value;
-    const complemento = 'casa';
     const num_residencia = document.getElementById('imovelnumero').value;
+    const bairro = document.getElementById('imovelbairro').value;
     const nome_proprietario = document.getElementById('imovelproprietario').value;
     const telefone = document.getElementById('imovelcontato').value;
     const descricao = document.getElementById('imoveldescricao').value;
@@ -15,13 +15,12 @@ imovelform.addEventListener('submit', async (event) => {
     //console.log(telefone, num_residencia);
 
     try {
-
         const resposta = await fetch('/imovel', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ cep, endereco, complemento, num_residencia, nome_proprietario, telefone, descricao, status })
+            body: JSON.stringify({ cep, endereco, num_residencia, bairro, nome_proprietario, telefone, descricao, status })
         })
         if (resposta.ok) {
             alert("cadastro sucedido");
@@ -55,9 +54,10 @@ async function CarregarImoveis(){
             imoveis.forEach(imovel => {
                 const linha = document.createElement('tr');
 
-                linha.innerHTML = `<td>${imovel.CEP}</td>
+                linha.innerHTML = `<td>${imovel.ENDERECO}</td>
+                                <td>${imovel.CEP}</td>
                                 <td>${imovel.NUM_RESIDENCIA}</td>
-                                <td>${imovel.ENDERECO}</td>
+                                <td>${imovel.BAIRRO}</td>
                                 <td>${imovel.NOME_PROPRIETARIO}</td>
                                 <td>${imovel.TELEFONE}</td>
                                 <td>${imovel.DESCRICAO}</td>
@@ -106,10 +106,11 @@ async function EditarImovel(idImovel) {
             document.getElementById('editarimovelendereco').value = imovel.ENDERECO;
             document.getElementById('editarimovelcep').value = imovel.CEP;
             document.getElementById('editarimovelnumero').value = imovel.NUM_RESIDENCIA;
+            document.getElementById('editarimovelbairro').value = imovel.BAIRRO;
             document.getElementById('editarimovelproprietario').value = imovel.NOME_PROPRIETARIO;
             document.getElementById('editarimovelcontato').value = imovel.TELEFONE;
             document.getElementById('editarimoveldescricao').value = imovel.DESCRICAO;
-            document.getElementById('status').value = imovel.STATUS;
+            document.getElementById('editarimovelstatus').value = imovel.STATUS;
             document.getElementById('idImovel').value = imovel.ID;
 
         } else {
@@ -131,7 +132,7 @@ async function DeletarImovel(idImovel) {
             }
         })
         if (resposta.ok) {
-            alert("Delete concluido");
+            alert("Imóvel deletado!");
             CarregarImoveis();
         } else {
             alert("Erro ao deletar");
@@ -150,11 +151,11 @@ document.getElementById("editarimovelform").addEventListener("submit", async (ev
     const endereco = document.getElementById('editarimovelendereco').value;
     const cep = document.getElementById('editarimovelcep').value;
     const num_residencia = document.getElementById('editarimovelnumero').value;
-    const complemento = 'casa';
+    const bairro = document.getElementById('editarimovelbairro').value;
     const nome_proprietario = document.getElementById('editarimovelproprietario').value;
     const telefone = document.getElementById('editarimovelcontato').value;
     const descricao = document.getElementById('editarimoveldescricao').value;
-    const status = document.getElementById('editarstatus').value;
+    const status = document.getElementById('editarimovelstatus').value;
     const idImovel = document.getElementById('idImovel').value;
 
     try {
@@ -163,7 +164,7 @@ document.getElementById("editarimovelform").addEventListener("submit", async (ev
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ cep, complemento, endereco, num_residencia, nome_proprietario, telefone, status, descricao, idImovel })
+            body: JSON.stringify({ cep, endereco, num_residencia, bairro, nome_proprietario, telefone, status, descricao, idImovel })
             //imovel.cep,imovel.complemento,imovel.endereco,imovel.num_residencia,imovel.nome_proprietario,imovel.telefone,imovel.status,imovel.descricao,id
         });
 

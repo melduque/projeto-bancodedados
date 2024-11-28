@@ -3,7 +3,7 @@ const form_parceiro = document.getElementById("form-parceiro");
 form_parceiro.addEventListener("submit", async (event) => {
     event.preventDefault();
 
-    const nome = document.getElementById("nome").value;
+    const nome = document.getElementById("nomeparceiro").value;
     const email = document.getElementById("email").value;
     const tipo = document.getElementById("tipo").value;
     const cnpj = document.getElementById("cnpj").value;
@@ -13,7 +13,7 @@ form_parceiro.addEventListener("submit", async (event) => {
     const cep = document.getElementById("cep").value;
     const numero = document.getElementById("numero").value;
 
-    console.log(nome, tipo, area_atuacao, telefone, cep, numero);
+    console.log(nome, email, tipo, cnpj, area_atuacao, telefone, cep, numero);
 
     try {
         const response = await fetch("/parceiro", {
@@ -26,6 +26,9 @@ form_parceiro.addEventListener("submit", async (event) => {
         if (response.ok) {
             alert('Parceiro cadastrado com sucesso!');
             form_parceiro.reset();
+            //funcão para alterar visibilidade passando duas divs, da 1° para a segunda 2°
+            document.getElementById('adc-parceiro').style.display= "none";
+            document.getElementById('ver-parceiro').style.display= "block";
             CarregarParceiros();
         } else {
             alert('Erro ao cadastrar parceiro. Tente novamente.');
@@ -35,6 +38,7 @@ form_parceiro.addEventListener("submit", async (event) => {
         console.error('Erro na requisição:', error);
         alert('Erro ao conectar ao servidor.');
     }
+
 });
 
 
@@ -60,7 +64,7 @@ async function CarregarParceiros() {
                                 <td>${parceiro.AREA_ATUACAO}</td>
                                 <td>
                                     <button type="button" onclick="ApagarParceiro(${parceiro.ID})" class="btn-delete"><img src="./images/excluir.png" style="width: 20px"></button>
-                                    <button type="button" onclick="EditarImovel(${parceiro.ID})" class="btn-edit"><img src="./images/editar.png" style="width: 20px"></button>
+                                    <button type="button" onclick="EditarParceiro(${parceiro.ID})" class="btn-edit"><img src="./images/editar.png" style="width: 20px"></button>
                                 </td>`;
                 tabela.appendChild(linha);
             });
@@ -88,6 +92,7 @@ async function ApagarParceiro(id) {
             }
         })
         if (response.ok) {
+            alert("Parceiro deletado!");
             console.log(`PARCEIRO ${id} foi apagado!`)
             CarregarParceiros();
         }
@@ -102,6 +107,10 @@ async function ApagarParceiro(id) {
 }
 
 async function EditarParceiro(idparceiro) {
+    //funcão para alterar visibilidade passando duas divs, da 1° para a segunda 2°
+    document.getElementById('ver-parceiro').style.display= "none";
+    document.getElementById('editar-parceiro').style.display= "block";
+
     try {
         const response = await fetch("/parceiro", {
             method: "GET",
@@ -193,4 +202,14 @@ document.getElementById("form-editparceiro").addEventListener("submit", async (e
         console.error('Erro na requisição:', erro);
         alert('Erro ao conectar ao servidor.');
     }
-})
+    
+    //funcão para alterar visibilidade passando duas divs, da 1° para a segunda 2°
+    document.getElementById('editar-parceiro').style.display= "none";
+    document.getElementById('ver-parceiro').style.display= "block";
+});
+
+function trocarDiv(div1, div2) {
+    document.getElementById(div1).style.display= "none";
+    console.log(div2);
+    document.getElementById(div2).style.display= "block";
+}

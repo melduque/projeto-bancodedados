@@ -18,6 +18,9 @@
         if (id === "imoveis") {
             showSubSection("imoveis", "ver-imoveis"); // Voltar para a sub-seção padrão
         }
+        else if (id === "parceiros") {
+            showSubSection("parceiros", "ver-parceiro"); // Voltar para a sub-seção padrão
+        }
     }
 
     // Função para gerenciar sub-seções dentro de uma seção principal
@@ -161,6 +164,7 @@
                             <table id="imoveltabela">
                                 <thead>
                                     <tr>
+                                        <th>Rua</th>
                                         <th>CEP</th>
                                         <th>Número</th>
                                         <th>Bairro</th>
@@ -184,7 +188,7 @@
                         </div>
                         <div class="table-wrapper">
                             <form id="imovelform">
-                                <label for="endereco">Endereço:</label>
+                                <label for="endereco">Rua:</label>
                                 <input type="text" id="imovelendereco" name="endereco">
 
                                 <label for="cep">CEP:</label>
@@ -224,7 +228,7 @@
                         <div class="table-wrapper">
                             <form id="editarimovelform">
                                 <input type="hidden" id="idImovel" />
-                                <label for="endereco">Endereço:</label>
+                                <label for="endereco">Rua:</label>
                                 <input type="text" id="editarimovelendereco" name="endereco">
 
                                 <label for="cep">CEP:</label>
@@ -246,7 +250,7 @@
                                 <textarea id="editarimoveldescricao" name="descricao"></textarea>
 
                                 <label for="status">Status:</label>
-                                <select id="status" name="status">
+                                <select id="editarimovelstatus" name="status">
                                     <option value="Disponivel">Disponível</option>
                                     <option value="Indisponivel">Indisponível</option>
                                     <option value="Em_manutencao">Em Manutenção</option>
@@ -411,7 +415,8 @@
                 <div id="ver-parceiro">
                     <div class="table-container">
                         <div class="table-header">
-                            <h1>Excluir Parceiros</h1>
+                            <h1>Parceiros</h1>
+                            <button class="btn-edit" onclick="trocarDiv('ver-parceiro','adc-parceiro')" id="adicionarParceiro"><img src="./images/botao-adicionar.png" style="width: 30px"></button>
                         </div>
                         <div class="table-wrapper">
                             <table id="tabelaexcluirparceiro">
@@ -439,7 +444,7 @@
                         <div class="table-wrapper">
                             <form id="form-parceiro">
                                 <label for="nome">Nome do Parceiro:</label>
-                                <input type="text" id="nome" name="nome">
+                                <input type="text" id="nomeparceiro" name="nome">
 
                                 <label for="email">Email:</label>
                                 <input type="email" id="email" name="email">
